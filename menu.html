@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu - Pizza Uno</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .cart-icon-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- header -->
+<header>
+    <a href="index.html" class="logo"><i class='bx bxs-home'></i>Pizza Uno</a>
+    <ul class="navlist">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="index.html#reviews">Our Customers</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+    </ul>
+    <div class="nav-icons">
+        <div class="cart-icon-container">
+            <a href="cart.html"><i class='bx bx-cart'></i></a>
+            <span id="cart-count" class="cart-count">0</span>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </div>
+</header>
+
+<!-- menu -->
+<section class="shop" id="shop">
+    <div class="middle-text">
+        <h4>Our Menu</h4>
+        <h2>Let's Check Popular Products</h2>
+    </div>
+    <div class="shop-content">
+        <div class="row">
+            <img src="images/pizza1.png" alt="Special Pizza">
+            <h3>Special Pizza</h3>
+            <p>With tomato sauce, cheese mixture, ham, bacon, pepperoni, mushrooms and pepper</p>
+            <div class="in-text">
+                <div class="price">
+                    <h6>$15.00</h6>
+                </div>
+                <div class="s-btnn">
+                    <a href="#" class="order-btn" data-id="1" data-name="Special Pizza" data-price="15.00" data-image="pizza1.png">Order Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <img src="images/pizza2.png" alt="4 Cheese Pizza">
+            <h3>4 Cheese Pizza</h3>
+            <p>With tomato sauce, mozzarella, gouda, edam & parmesan</p>
+            <div class="in-text">
+                <div class="price">
+                    <h6>$13.00</h6>
+                </div>
+                <div class="s-btnn">
+                    <a href="#" class="order-btn" data-id="2" data-name="4 Cheese Pizza" data-price="13.00" data-image="pizza2.png">Order Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <img src="images/pizza3.png" alt="Vegetarian">
+            <h3>Vegetarian</h3>
+            <p>With a mixture of cheeses, fresh tomato, green pepper, fresh mushrooms, onion & olive rings</p>
+            <div class="in-text">
+                <div class="price">
+                    <h6>$17.00</h6>
+                </div>
+                <div class="s-btnn">
+                    <a href="#" class="order-btn" data-id="3" data-name="Vegetarian" data-price="17.00" data-image="pizza3.png">Order Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <img src="images/pizza4.png" alt="Pesto italiana">
+            <h3>Pesto italiana</h3>
+            <p>With pesto sauce, tomato sauce, mozzarella, parmesana, fresh tomato cubes & basil</p>
+            <div class="in-text">
+                <div class="price">
+                    <h6>$20.00</h6>
+                </div>
+                <div class="s-btnn">
+                    <a href="#" class="order-btn" data-id="4" data-name="Pesto italiana" data-price="20.00" data-image="pizza4.png">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popup Container -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <p id="popup-message"></p>
+        <div class="popup-buttons">
+            <button id="continue-shopping" class="popup-btn">Continue Shopping</button>
+            <button id="go-to-cart" class="popup-btn">Go to Cart</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<!-- link to javascript -->
+<script src="script.js"></script>
+
+</body>
+</html>

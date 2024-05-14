@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: #111;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #444;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details h3 {
+            margin: 0 0 10px;
+        }
+
+        .item-details p {
+            margin: 5px 0;
+        }
+
+        .quantity-btn {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+        .quantity-btn:hover {
+            background-color: #28a745; 
+        }
+
+        .quantity {
+            margin: 0 10px;
+        }
+
+        .remove-btn, .checkout-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .remove-btn:hover, .checkout-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #000; 
+        }
+
+        .checkout-btn:hover {
+            background-color: #28a745; 
+        }
+
+        .middle-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .middle-text h2 {
+            margin: 10px 0;
+        }
+
+        .middle-text p {
+            font-size: 18px;
+        }
+
+        .checkout-form {
+            display: none;
+            padding: 20px;
+            background-color: #111;
+            color: #fff;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .checkout-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .checkout-form input,
+        .checkout-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .checkout-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000; 
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .checkout-form button:hover {
+            background-color: #28a745; 
+        }
+
+        #order-confirmation-popup .popup-content {
+            text-align: center;
+        }
+
+        #order-confirmation-popup .popup-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #order-confirmation-popup .popup-btn:hover {
+            background-color: #218838;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #111;
+            color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .popup-content p {
+            margin: 20px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #ff0000;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo"><i class='bx bxs-home'></i>Pizza Uno</a> 
+        <ul class="navlist">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+        </ul>
+    </header>
+
+    <section class="cart" id="cart">
+        <div class="middle-text">
+            <h4>Your Cart</h4>
+            <h2>Items You Have Ordered</h2>
+            <p id="total-items"></p>
+        </div>
+
+        <div class="cart-content" id="cart-content">
+
+        </div>
+        <button id="checkout-btn" class="checkout-btn">Checkout</button>
+    </section>
+
+    <section class="checkout-form" id="checkout-form">
+        <div class="middle-text">
+            <h4>Checkout</h4>
+            <h2>Fill in your details</h2>
+        </div>
+        <form id="checkout-details">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" required>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cash">Cash on Delivery</option>
+            </select>
+
+            <button type="submit" class="checkout-btn">Proceed</button>
+        </form>
+    </section>
+
+    <div id="order-confirmation-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p>Thank you for your order! Please check your email for the delivery status.</p>
+            <button class="popup-btn" id="close-confirmation">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartContent = document.getElementById('cart-content');
+            const totalItems = document.getElementById('total-items');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const checkoutForm = document.getElementById('checkout-form');
+            const checkoutDetails = document.getElementById('checkout-details');
+            const orderConfirmationPopup = document.getElementById('order-confirmation-popup');
+            const closeConfirmation = document.getElementById('close-confirmation');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const updateCartDisplay = () => {
+                cartContent.innerHTML = '';
+                if (cart.length === 0) {
+                    cartContent.innerHTML = '<p>Your cart is empty.</p>';
+                    totalItems.textContent = '';
+                    checkoutBtn.style.display = 'none';
+                } else {
+                    cart.forEach((item, index) => {
+                        const cartItem = document.createElement('div');
+                        cartItem.classList.add('cart-item');
+                        cartItem.innerHTML = `
+                            <img src="images/${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="item-details">
+                                <h3>${item.name}</h3>
+                                <p>Price: $${item.price}</p>
+                                <p>Quantity: 
+                                    <button class="quantity-btn" data-index="${index}" data-change="-1">-</button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="quantity-btn" data-index="${index}" data-change="1">+</button>
+                                </p>
+                                <button class="remove-btn" data-index="${index}">Remove</button>
+                            </div>
+                        `;
+                        cartContent.appendChild(cartItem);
+                    });
+                    totalItems.textContent = `Total Items: ${cart.reduce((total, item) => total + item.quantity, 0)}`;
+                    checkoutBtn.style.display = 'block';
+                }
+            };
+
+            cartContent.addEventListener('click', (event) => {
+                if (event.target.classList.contains('quantity-btn')) {
+                    const index = parseInt(event.target.getAttribute('data-index'));
+                    const change = parseInt(event.target.getAttribute('data-change'));
+                    updateQuantity(index, change);
+                } else if (event.target.classList.contains('remove-btn')) {
+                    const index = parseInt(event.target.getAttribute('data-index'));
+                    removeItem(index);
+                }
+            });
+
+            const updateQuantity = (index, change) => {
+                if (cart[index].quantity + change > 0) {
+                    cart[index].quantity += change;
+                } else if (cart[index].quantity + change === 0) {
+                    cart.splice(index, 1);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            };
+
+            const removeItem = (index) => {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            };
+
+            checkoutBtn.addEventListener('click', () => {
+                document.querySelector('.cart').style.display = 'none';
+                checkoutForm.style.display = 'block';
+            });
+
+            checkoutDetails.addEventListener('submit', (event) => {
+                event.preventDefault();
+                checkoutForm.style.display = 'none';
+                orderConfirmationPopup.style.display = 'flex';
+                localStorage.removeItem('cart');
+            });
+
+            closeConfirmation.addEventListener('click', () => {
+                orderConfirmationPopup.style.display = 'none';
+                window.location.href = 'index.html';
+            });
+
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
